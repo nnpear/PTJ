@@ -8,75 +8,61 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-/* RESET & BODY */
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body {background:#0a0a0a;color:#f1c40f;overflow-x:hidden;scroll-behavior:smooth;}
-
-/* NAVBAR */
 nav {position:fixed;width:100%;padding:20px 50px;display:flex;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:1000;}
-nav a {color:#f1c40f;font-size:1.1rem;margin:0 15px;text-decoration:none;font-weight:600;transition:0.3s;}
-nav a:hover {color:#ffffff;}
-
-/* HERO / HOME */
+nav button {background:none;border:none;color:#f1c40f;font-size:1.1rem;margin:0 15px;cursor:pointer;transition:0.3s;font-weight:600;}
+nav button:hover {color:#ffffff;}
 header {height:100vh;background:url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;position:relative;}
-header::after {content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.75);}
+header::after {content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.7);}
 .hero {position:relative; z-index:1; text-align:center;}
 .hero h1 {font-size:5rem;color:#f1c40f;margin-bottom:15px; animation:fadeUp 1s ease forwards;}
 .hero p {color:#ddd;font-size:1.2rem;}
 .hero .btn {display:inline-block;margin-top:25px;padding:12px 30px;background:#f1c40f;color:black;text-decoration:none;border-radius:30px;font-weight:600;transition:0.3s;}
 .hero .btn:hover {background:#ffffff;transform:scale(1.05);}
-
-/* SECTIONS */
-section {padding:60px 20px;text-align:center;border-bottom:1px solid #333;}
-h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #f1c40f;
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
+section {display:none; padding:40px 50px; text-align:center; border-bottom:1px solid #333; opacity:0; transition: opacity 0.6s;}
+section.active {display:block; opacity:1;}
+h2 {font-size: 1.8rem; margin-bottom: 20px; color: #f1c40f; text-decoration: underline; text-underline-offset: 6px;}
 p, a {color:#f1c40f;}
 a:hover {text-decoration:underline;}
-
-/* SERVICES CARDS */
-.services {display:flex;flex-wrap:wrap;justify-content:center;gap:15px;}
-.card {background:#111;padding:30px;border-radius:15px;width:220px;transition:0.3s;text-align:center;border:1px solid #333;}
+.card {background:#111;padding:30px;border-radius:15px;width:220px;display:inline-block;margin:10px;border:1px solid #333;transition:0.3s;text-align:center;}
 .card:hover {transform:translateY(-10px);border-color:#f1c40f;}
-
-/* JOIN / CTA */
 .cta {background:linear-gradient(135deg,#f1c40f,#d4ac0d); color:black; border-radius:20px; padding:40px; margin-top:20px;}
 .cta h2, .cta p, .cta .btn {color:black;}
-
-/* CONTACT */
 .contact {background:#111;border-radius:20px;padding:40px;margin-top:20px;border:1px solid #333;}
-
-/* FOOTER */
 footer {background:black;padding:30px;text-align:center;color:#777;}
 footer a {color:#f1c40f;margin:0 5px;text-decoration:none;}
-
-/* ANIMATIONS */
 @keyframes fadeUp {from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 @media(max-width:768px){.hero h1{font-size:3rem;}nav{padding:15px 20px;}}
 </style>
-</head>
 
+<script>
+function showSection(id){
+  var sections = document.querySelectorAll('section');
+  sections.forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+</script>
+
+</head>
 <body>
 
 <!-- NAVBAR -->
 <nav>
-  <a href="#about">About</a>
-  <a href="#founders">Founding Story</a>
-  <a href="#services">Services</a>
-  <a href="#join">Join</a>
-  <a href="#contact">Contact</a>
+  <button onclick="showSection('about')">About</button>
+  <button onclick="showSection('founders')">Founding Story</button>
+  <button onclick="showSection('services')">Services</button>
+  <button onclick="showSection('join')">Join</button>
+  <button onclick="showSection('contact')">Contact</button>
 </nav>
 
-<!-- HERO -->
+<!-- HOME HERO -->
 <header>
   <div class="hero">
     <h1>PTJ - Pursue The Journey</h1>
     <p>Stronger every day. Better every step.</p>
-    <a class="btn" href="#about">Explore Our Journey</a>
+    <a class="btn" onclick="showSection('about')">Explore Our Journey</a>
   </div>
 </header>
 
@@ -86,10 +72,16 @@ footer a {color:#f1c40f;margin:0 5px;text-decoration:none;}
   <p>PTJ is more than a gym — it's a mindset. Built on discipline, growth, and consistency. Every session pushes you forward.</p>
 </section>
 
-<!-- FOUNDERS -->
+<!-- FOUNDING STORY -->
 <section id="founders">
   <h2>Our Founding Story</h2>
   <p>PTJ – Pursue The Journey – was created by <strong>Lewis Tye</strong>, <strong>Noah Pearson</strong>, and <strong>Cody Jeacock</strong>. Inspired by a passion for fitness, discipline, and personal growth, they wanted to build more than just a gym. PTJ is a community where everyone can push their limits, grow stronger, and stay motivated every step of the journey.</p>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <h2>Our Mission</h2>
+  <p>To help you stay committed to your journey — physically and mentally. Progress over perfection.</p>
 </section>
 
 <!-- SERVICES -->
@@ -124,7 +116,12 @@ footer a {color:#f1c40f;margin:0 5px;text-decoration:none;}
   <div class="cta">
     <h2>Your Journey Starts Now</h2>
     <p>Are you ready to pursue it?</p>
-    <a class="btn" href="#contact">Join PTJ</a>
+    <a class="btn" onclick="showSection('contact')">Join PTJ</a>
+    <br><br>
+    <!-- Audio Play/Pause Buttons -->
+    <button class="btn" onclick="document.getElementById('daftAudio').play()">Play "Around the World"</button>
+    <button class="btn" onclick="document.getElementById('daftAudio').pause()">Pause Music</button>
+    <audio id="daftAudio" src="daft-punk-around-the-world.mp3"></audio>
   </div>
 </section>
 
@@ -141,29 +138,13 @@ footer a {color:#f1c40f;margin:0 5px;text-decoration:none;}
 <footer>
   <p>PTJ – Pursue The Journey</p>
   <p>
-    <a href="#about">About</a> | 
-    <a href="#founders">Founders</a> | 
-    <a href="#services">Services</a> | 
-    <a href="#join">Join</a> | 
-    <a href="#contact">Contact</a>
+    <a onclick="showSection('about')">About</a> | 
+    <a onclick="showSection('founders')">Founders</a> | 
+    <a onclick="showSection('services')">Services</a> | 
+    <a onclick="showSection('join')">Join</a> | 
+    <a onclick="showSection('contact')">Contact</a>
   </p>
 </footer>
-
-<!-- BACKGROUND MUSIC -->
-<audio id="bg-music" src="around-the-world.mp3" loop></audio>
-<div style="position:fixed;bottom:20px;right:20px;">
-  <button onclick="toggleMusic()" style="padding:10px 15px;background:#f1c40f;border:none;border-radius:10px;font-weight:600;cursor:pointer;">
-    Play / Pause Music
-  </button>
-</div>
-
-<script>
-function toggleMusic(){
-  const music = document.getElementById('bg-music');
-  if(music.paused){ music.play(); }
-  else { music.pause(); }
-}
-</script>
 
 </body>
 </html>
