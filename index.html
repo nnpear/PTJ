@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,14 +36,19 @@ h2 {
   font-size: 1.8rem;            /* slightly smaller */
   margin-bottom: 20px;
   color: #f1c40f;
-  text-decoration: underline;   /* added underline */
-  text-underline-offset: 6px;   /* optional spacing */
+  text-decoration: underline;   /* underline */
+  text-underline-offset: 6px;
 }
 p, a {color:#f1c40f;}
 a:hover {text-decoration:underline;}
 .card {background:#111;padding:30px;border-radius:15px;width:220px;display:inline-block;margin:10px;border:1px solid #333;transition:0.3s;text-align:center;}
 .card:hover {transform:translateY(-10px);border-color:#f1c40f;}
-.cta {background:linear-gradient(135deg,#f1c40f,#d4ac0d);color:black;border-radius:20px;padding:40px;margin-top:20px;}
+
+/* JOIN / CTA */
+.cta {background:linear-gradient(135deg,#f1c40f,#d4ac0d); color:black; border-radius:20px; padding:40px; margin-top:20px;}
+.cta h2, .cta p, .cta .btn {color:black;}  /* ensures heading, paragraph, and button text inside CTA is black */
+
+/* CONTACT */
 .contact {background:#111;border-radius:20px;padding:40px;margin-top:20px;border:1px solid #333;}
 
 /* FOOTER */
