@@ -5,115 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PTJ - Pursue The Journey</title>
 
+<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
+/* RESET & BODY */
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body {background:#0a0a0a;color:#f1c40f;overflow-x:hidden;scroll-behavior:smooth;}
 
-nav {position:fixed;width:100%;padding:20px;display:flex;justify-content:center;background:rgba(0,0,0,0.8);}
-nav button {background:none;border:none;color:#f1c40f;margin:0 10px;font-size:1rem;cursor:pointer;}
+/* NAVBAR */
+nav {position:fixed;width:100%;padding:20px 50px;display:flex;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:1000;}
+nav button {background:none;border:none;color:#f1c40f;font-size:1.1rem;margin:0 15px;cursor:pointer;transition:0.3s;font-weight:600;}
+nav button:hover {color:#ffffff;}
 
-header {height:100vh;background:url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;}
-.hero h1 {font-size:4rem;}
-.hero p {color:#ddd;}
+/* HERO */
+header {height:100vh;background:url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;position:relative;}
+header::after {content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.7);}
+.hero {position:relative; z-index:1; animation:fadeUp 1s ease forwards;}
+.hero h1 {font-size:5rem;color:#f1c40f;margin-bottom:15px;}
+.hero p {color:#ddd;font-size:1.2rem;}
+.hero .btn {display:inline-block;margin-top:25px;padding:12px 30px;background:#f1c40f;color:black;text-decoration:none;border-radius:30px;font-weight:600;transition:0.3s;}
+.hero .btn:hover {background:#ffffff;transform:scale(1.05);}
 
-.btn {margin-top:20px;padding:10px 25px;background:#f1c40f;color:black;border:none;border-radius:20px;cursor:pointer;}
+/* COLLAPSIBLE SECTIONS */
+section {max-height:0;overflow:hidden;transition:max-height 0.6s ease,padding 0.6s ease; padding:0 50px;border-bottom:1px solid #333; opacity:0; transition: max-height 0.6s ease, padding 0.6s ease, opacity 0.6s;}
+section.active {max-height:1500px;padding:40px 50px; opacity:1;}
 
-section {display:none;padding:40px;text-align:center;}
-section.active {display:block;}
+/* HEADINGS & TEXT */
+h2 {font-size:2rem;margin-bottom:20px;color:#f1c40f;}
+p,a {color:#f1c40f;}
+a:hover {text-decoration:underline;}
+.btn {transition:0.3s; cursor:pointer;}
+.card {background:#111;padding:30px;border-radius:15px;width:220px;display:inline-block;margin:10px;border:1px solid #333;transition:0.3s;text-align:center;}
+.card:hover {transform:translateY(-10px);border-color:#f1c40f;}
+.cta {background:linear-gradient(135deg,#f1c40f,#d4ac0d);color:black;border-radius:20px;padding:40px;margin-top:20px;}
+.contact {background:#111;border-radius:20px;padding:40px;margin-top:20px;border:1px solid #333;}
 
-h2 {font-size:1.8rem;text-decoration:underline;margin-bottom:20px;}
+/* FOOTER */
+footer {background:black;padding:30px;text-align:center;color:#777;}
+footer a {color:#f1c40f;margin:0 5px;text-decoration:none;}
 
-.cta {background:linear-gradient(135deg,#f1c40f,#d4ac0d);color:black;padding:30px;border-radius:20px;}
-.cta h2,.cta p {color:black;}
-
-.card {background:#111;padding:20px;margin:10px;display:inline-block;border-radius:10px;}
-footer {text-align:center;padding:20px;}
+/* ANIMATIONS */
+@keyframes fadeUp {from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:768px){.hero h1{font-size:3rem;}nav{padding:15px 20px;}}
 </style>
 
 <script>
-function showSection(id){
-  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+// COLLAPSIBLE + SMOOTH SCROLL
+function toggleSection(id){
+  var sections = document.querySelectorAll('section');
+  sections.forEach(sec=>{
+    if(sec.id===id){sec.classList.toggle('active');} else {sec.classList.remove('active');}
+  });
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 </script>
 
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav>
-  <button onclick="showSection('about')">About</button>
-  <button onclick="showSection('services')">Services</button>
-  <button onclick="showSection('join')">Join</button>
-  <button onclick="showSection('contact')">Contact</button>
+  <button onclick="toggleSection('about')">About</button>
+  <button onclick="toggleSection('founders')">Founding Story</button>
+  <button onclick="toggleSection('services')">Services</button>
+  <button onclick="toggleSection('join')">Join</button>
+  <button onclick="toggleSection('contact')">Contact</button>
 </nav>
 
-<!-- HOME -->
+<!-- HERO -->
 <header>
   <div class="hero">
-    <h1>PTJ</h1>
-    <p>Pursue The Journey</p>
-    <button class="btn" onclick="showSection('about')">Start</button>
+    <h1>Pursue The Journey</h1>
+    <p>Stronger every day. Better every step.</p>
+    <a href="#join" class="btn" onclick="toggleSection('join')">Start Now</a>
   </div>
 </header>
 
 <!-- ABOUT -->
 <section id="about">
-  <h2>About</h2>
-  <p>PTJ is about discipline, growth, and pushing your limits.</p>
+  <h2>Who We Are</h2>
+  <p>PTJ is more than a gym — it's a mindset. Built on discipline, growth, and consistency. Every session pushes you forward.</p>
+</section>
+
+<!-- FOUNDING STORY -->
+<section id="founders">
+  <h2>Our Founding Story</h2>
+  <p>PTJ – Pursue The Journey – was created by <strong>Lewis Tye</strong>, <strong>Noah Pearson</strong>, and <strong>Cody Jeacock</strong>. Inspired by a passion for fitness, discipline, and personal growth, they wanted to build more than just a gym. PTJ is a community where everyone can push their limits, grow stronger, and stay motivated every step of the journey.</p>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <h2>Our Mission</h2>
+  <p>To help you stay committed to your journey — physically and mentally. Progress over perfection.</p>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-  <h2>Services</h2>
-  <div class="card">💪 Personal Training</div>
-  <div class="card">🏃 Conditioning</div>
-  <div class="card">🧠 Mindset</div>
+  <h2>What We Offer</h2>
+  <div class="services">
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/50/f1c40f/dumbbell.png" alt="Personal Training Icon" style="display:block;margin:0 auto 10px;">
+      💪 Personal Training
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/50/f1c40f/running.png" alt="Strength Icon" style="display:block;margin:0 auto 10px;">
+      🏃 Strength & Conditioning
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/50/f1c40f/brain.png" alt="Mindset Icon" style="display:block;margin:0 auto 10px;">
+      🧠 Mindset Coaching
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/50/f1c40f/salad.png" alt="Nutrition Icon" style="display:block;margin:0 auto 10px;">
+      🥗 Fitness Guidance
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/ios-filled/50/f1c40f/group.png" alt="Group Icon" style="display:block;margin:0 auto 10px;">
+      👥 Group Sessions
+    </div>
+  </div>
 </section>
 
-<!-- JOIN (WITH MUSIC) -->
+<!-- JOIN -->
 <section id="join">
   <div class="cta">
     <h2>Your Journey Starts Now</h2>
     <p>Are you ready to pursue it?</p>
-
-    <button class="btn" onclick="showSection('contact')">Join PTJ</button>
-
-    <br><br>
-
-    <!-- MUSIC BUTTONS -->
-    <button class="btn" onclick="playMusic()">▶ Play Music</button>
-    <button class="btn" onclick="pauseMusic()">⏸ Pause</button>
-
-    <!-- AUDIO FILE -->
-    <audio id="music">
-      <source src="daft-punk-around-the-world.mp3" type="audio/mpeg">
-    </audio>
-
+    <a href="#" class="btn" onclick="toggleSection('contact')">Join PTJ</a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <h2>Contact</h2>
-  <p>Email: PTJfitness@business.com</p>
-  <p>Phone: 08001234567</p>
+  <div class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:PTJfitness@business.com">PTJfitness@business.com</a></p>
+    <p>Phone: <a href="tel:08001234567">08001234567</a></p>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <p>PTJ – Pursue The Journey</p>
+  <p>
+    <a href="#about" onclick="toggleSection('about')">About</a> | 
+    <a href="#founders" onclick="toggleSection('founders')">Founders</a> | 
+    <a href="#services" onclick="toggleSection('services')">Services</a> | 
+    <a href="#join" onclick="toggleSection('join')">Join</a> | 
+    <a href="#contact" onclick="toggleSection('contact')">Contact</a>
+  </p>
 </footer>
-
-<script>
-function playMusic(){
-  document.getElementById("music").play();
-}
-function pauseMusic(){
-  document.getElementById("music").pause();
-}
-</script>
 
 </body>
 </html>
